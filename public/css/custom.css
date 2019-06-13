@@ -1,0 +1,11 @@
+.list-surat{
+    /* cursor: pointer; */
+}
+
+.dt{
+    cursor: pointer;
+}
+
+.list-surat:hover{
+    background: rgba(240, 248, 255, .5);
+}
