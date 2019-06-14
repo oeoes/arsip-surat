@@ -18,4 +18,6 @@ Route::prefix('arsip-surat')->group(function() {
     Route::get('/surat-keluar', 'LetterController@suratKeluar')->name('surat.keluar');
     Route::post('/update-surat/{id}', 'LetterController@updateSurat')->name('update.surat');
     Route::get('/delete-surat/{id}', 'LetterController@deleteSurat')->name('delete.surat');
+    Route::get('/favorite/keep/{id}', 'LetterController@addFavorite')->name('add.favorite');
+    Route::get('/favorite', 'LetterController@favoriteList')->name('favorite');
 });
