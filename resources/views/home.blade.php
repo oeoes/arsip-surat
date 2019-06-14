@@ -40,6 +40,11 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="tgl_surat">Tanggal Surat</label>
+                        <input name="tgl_surat" type="date" class="form-control" id="tgl_surat" placeholder="Masukan tanggal surat">
+                    </div>
+
+                    <div class="form-group">
                         <label for="asal_surat">Asal</label>
                         <input name="asal_surat" type="text" class="form-control" id="asal_surat" placeholder="Masukan asal surat">
                     </div>
@@ -52,11 +57,6 @@
                     <div class="form-group">
                         <label for="index_surat">Index</label>
                         <input name="index_surat" type="text" class="form-control" id="index_surat" placeholder="Masukan index surat">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="tgl_surat">Tanggal Surat</label>
-                        <input name="tgl_surat" type="date" class="form-control" id="tgl_surat" placeholder="Masukan tanggal surat">
                     </div>
 
                     <div class="form-group">
@@ -211,9 +211,16 @@
                                 @endif
                                 <td>{{ $d->tujuan }}</td>
                                 <td><div class="row">
-                                    <div class="col-12"><i class="fas fa-pencil-alt dt" data-toggle="modal" data-target="#update{{ $dt }}" title="Edit"></i></div>
-                                    <div class="col-12"><i class="fas fa-trash-alt dt" data-toggle="modal" data-target="#delete{{ $dt }}" title="Hapus"></i></div>
-                                    <div class="col-12"><i class="fas fa-eye dt" data-toggle="modal" data-target="#detail{{ $dt }}" title="View detail"></i></div>
+                                    <div class="col-12"><i class="fas fa-pencil-alt dt pen" data-toggle="modal" data-target="#update{{ $dt }}" title="Edit"></i></div>
+                                    <div class="col-12"><i class="fas fa-trash-alt dt trash" data-toggle="modal" data-target="#delete{{ $dt }}" title="Hapus"></i></div>
+                                    <div class="col-12"><i class="fas fa-eye dt eye" data-toggle="modal" data-target="#detail{{ $dt }}" title="View detail"></i></div>
+                                    <div class="col-12">
+                                        @if($d->is_favorite == 0)
+                                        <a href="{{ route('add.favorite', ['id' => $d->id]) }}"><i class="fas fa-star dt star"  title="Tambahkan ke favorit"></i></a>
+                                        @else
+                                        <a href="{{ route('add.favorite', ['id' => $d->id]) }}"><i class="fas fa-star dt star"  title="Hapus dari favorit" style="color: #fb4"></i></a>
+                                        @endif
+                                    </div>
                                 </div></td>
                             </tr>
 
@@ -229,14 +236,88 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="row">
-                                            <div class="col-12 mb-3">
+                                            <div class="col-md-8">
                                                 <img src="{{ asset($d->arsip) }}" alt="" style="max-width: 100%; align: center">
                                             </div>
-                                            <div class="col-12">
+                                            <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-4 offset-md-4">
-                                                        
+                                                    <!-- Detail surat -->
+                                                    <div class="col-12 td-desc">
+                                                        <div class="row">
+                                                            <div class="col-4"><small>Judul</small></div>
+                                                            <div class="col-8">{{ $d->judul }}</div>
+                                                        </div>
                                                     </div>
+                                                    <div class="col-12 td-desc">
+                                                        <div class="row">
+                                                            <div class="col-4"><small>Tgl surat</small></div>
+                                                            <div class="col-8">{{ $d->tgl_surat }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 td-desc">
+                                                        <div class="row">
+                                                            <div class="col-4"><small>Tgl pembukuan</small></div>
+                                                            <div class="col-8">{{ $d->tgl_pembukuan }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 td-desc">
+                                                        <div class="row">
+                                                            <div class="col-4"><small>Asal surat</small></div>
+                                                            <div class="col-8">{{ $d->asal_surat }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 td-desc">
+                                                        <div class="row">
+                                                            <div class="col-4"><small>Jenis</small></div>
+                                                            <div class="col-8">{{ $d->jenis_surat }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 td-desc">
+                                                        <div class="row">
+                                                            <div class="col-4"><small>No surat</small></div>
+                                                            <div class="col-8">{{ $d->no_surat }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 td-desc">
+                                                        <div class="row">
+                                                            <div class="col-4"><small>Tujuan</small></div>
+                                                            <div class="col-8">{{ $d->tujuan }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 td-desc">
+                                                        <div class="row">
+                                                            <div class="col-4"><small>Penerima</small></div>
+                                                            <div class="col-8">{{ $d->penerima }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 td-desc">
+                                                        <div class="row">
+                                                            <div class="col-4"><small>NIP penerima</small></div>
+                                                            <div class="col-8">{{ $d->nip_penerima }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 td-desc">
+                                                        <div class="row">
+                                                            <div class="col-4"><small>Index surat</small></div>
+                                                            <div class="col-8">{{ $d->index_surat }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 td-desc">
+                                                        <div class="row">
+                                                            <div class="col-4"><small>Perihal</small></div>
+                                                            <div class="col-8">{{ $d->perihal }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 td-desc">
+                                                        <div class="row">
+                                                            <div class="col-4"><small>Keterangan</small></div>
+                                                            <div class="col-8">{{ $d->keterangan }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 text-center mt-4">
+                                                        <a href="{{ asset($d->arsip) }}" target="_blank" class="btn btn-primary" style="width: 50%" title="Download file arsip"><i class="fa fa-download"></i></a>
+                                                    </div>
+                                                    <!-- End of detail surat -->
                                                 </div>
                                             </div>
                                         </div>
@@ -274,7 +355,7 @@
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title h4" id="myLargeModalLabel">Rekam Surat Masuk/Keluar</h5>
+                                        <h5 class="modal-title h4" id="myLargeModalLabel">Perbarui Surat Masuk/Keluar</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">×</span>
                                         </button>
@@ -384,32 +465,55 @@
         <!-- .col -->
         <div class="col-md-12 col-lg-8 col-sm-12">
             <div class="white-box">
-                <h3 class="box-title">Recent Comments</h3>
+                <h3 class="box-title">Baru Ditambahkan <i class="fa fa-star" style="color: #fb4"></i></h3>
                 <div class="comment-center p-t-10">
+                    <!-- Comment Body -->
+                    @foreach ($favorite as $fav)
                     <div class="comment-body">
-                        <div class="user-img"> <img src="{{ asset('images/users/pawandeep.jpg') }}" alt="user" class="rounded-circle">
+                        <div class="row no-gutters">
+                            <div class="col-1">
+                                @if($fav->jenis_surat == 'masuk')
+                                <div class="lett-ico in-bg"></div>
+                                @else
+                                <div class="lett-ico out-bg"></div>
+                                @endif
+                            </div>
+                            <div class="col-9">
+                                <div class="mail-contnet pl-0">
+                                    <h5 class="mb-0">{{ $fav->judul }}</h5>
+                                    @if($fav->jenis_surat == 'masuk')
+                                    <div class="text-muted mb-2"><small>Surat {{ $fav->jenis_surat }}</small> | <small>Dari {{ $fav->asal_surat }}</small></div>
+                                    @else
+                                    <div class="text-muted mb-2"><small>Surat {{ $fav->jenis_surat }}</small> | <small>Ke {{ $fav->asal_surat }}</small></div>
+                                    @endif
+                                    <div class="row">
+                                        <div class="col-12 mail-desc mt-0 mb-0">
+                                            <div class="row">
+                                                <div class="col-md-2">Penerima</div>
+                                                <div class="col-md-8">-> {{ $fav->penerima }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mail-desc mt-0 mb-0">
+                                            <div class="row">
+                                                <div class="col-md-2">Index</div>
+                                                <div class="col-md-8">-> {{ $fav->index_surat }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mail-desc mt-0 mb-0">
+                                            <div class="row">
+                                                <div class="col-md-2">Keterangan</div>
+                                                <div class="col-md-8">-> {{ $fav->keterangan }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="mail-contnet">
-                            <h5>Pavan kumar</h5><span class="time">10:20 AM   20  may 2016</span>
-                            <br/><span class="mail-desc">Donec ac condimentum massa. Etiam pellentesque pretium lacus. Phasellus ultricies dictum suscipit. Aenean commodo dui pellentesque molestie feugiat. Aenean commodo dui pellentesque molestie feugiat</span> <a href="javacript:void(0)" class="btn btn btn-rounded btn-default btn-outline m-r-5"><i class="ti-check text-success m-r-5"></i>Approve</a><a href="javacript:void(0)" class="btn-rounded btn btn-default btn-outline"><i class="ti-close text-danger m-r-5"></i> Reject</a>
-                        </div>
+                        
+                        
                     </div>
-                    <div class="comment-body">
-                        <div class="user-img"> <img src="{{ asset('images/users/sonu.jpg') }}" alt="user" class="rounded-circle">
-                        </div>
-                        <div class="mail-contnet">
-                            <h5>Sonu Nigam</h5><span class="time">10:20 AM   20  may 2016</span>
-                            <br/><span class="mail-desc">Donec ac condimentum massa. Etiam pellentesque pretium lacus. Phasellus ultricies dictum suscipit. Aenean commodo dui pellentesque molestie feugiat. Aenean commodo dui pellentesque molestie feugiat</span>
-                        </div>
-                    </div>
-                    <div class="comment-body b-none">
-                        <div class="user-img"> <img src="{{ asset('images/users/arijit.jpg') }}" alt="user" class="rounded-circle">
-                        </div>
-                        <div class="mail-contnet">
-                            <h5>Arijit singh</h5><span class="time">10:20 AM   20  may 2016</span>
-                            <br/><span class="mail-desc">Donec ac condimentum massa. Etiam pellentesque pretium lacus. Phasellus ultricies dictum suscipit. Aenean commodo dui pellentesque molestie feugiat. Aenean commodo dui pellentesque molestie feugiat</span>
-                        </div>
-                    </div>
+                    @endforeach
+                    <!-- End of comment body -->
                 </div>
             </div>
         </div>
@@ -418,59 +522,21 @@
                 <div class="sk-chat-widgets">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            CHAT LISTING
+                            Semua Favorite
                         </div>
                         <div class="panel-body">
                             <ul class="chatonline">
+                                @foreach($fav_all as $fall)
                                 <li>
                                     <div class="call-chat">
                                         <button class="btn btn-success btn-circle btn-lg" type="button"><i class="fa fa-phone"></i></button>
                                         <button class="btn btn-info btn-circle btn-lg" type="button"><i class="fa fa-comments-o"></i></button>
                                     </div>
-                                    <a href="javascript:void(0)"><img src="{{ asset('images/users/varun.jpg') }}" alt="user-img" class="rounded-circle"> <span>Varun Dhavan <small class="text-success">online</small></span></a>
+                                    <a href="javascript:void(0)"><img src="{{ asset('images/users/varun.jpg') }}" alt="user-img" class="rounded-circle"> 
+                                        <span>{{ $fall->judul }} @if($fall->jenis_surat == 'masuk')<small class="text-success">{{ $fall->jenis_surat }}</small>@else<small class="text-info">{{ $fall->jenis_surat }}</small>@endif</span>
+                                    </a>
                                 </li>
-                                <li>
-                                    <div class="call-chat">
-                                        <button class="btn btn-success btn-circle btn-lg" type="button"><i class="fa fa-phone"></i></button>
-                                        <button class="btn btn-info btn-circle btn-lg" type="button"><i class="fa fa-comments-o"></i></button>
-                                    </div>
-                                    <a href="javascript:void(0)"><img src="{{ asset('images/users/genu.jpg') }}" alt="user-img" class="rounded-circle"> <span>Genelia Deshmukh <small class="text-warning">Away</small></span></a>
-                                </li>
-                                <li>
-                                    <div class="call-chat">
-                                        <button class="btn btn-success btn-circle btn-lg" type="button"><i class="fa fa-phone"></i></button>
-                                        <button class="btn btn-info btn-circle btn-lg" type="button"><i class="fa fa-comments-o"></i></button>
-                                    </div>
-                                    <a href="javascript:void(0)"><img src="{{ asset('images/users/ritesh.jpg') }}" alt="user-img" class="rounded-circle"> <span>Ritesh Deshmukh <small class="text-danger">Busy</small></span></a>
-                                </li>
-                                <li>
-                                    <div class="call-chat">
-                                        <button class="btn btn-success btn-circle btn-lg" type="button"><i class="fa fa-phone"></i></button>
-                                        <button class="btn btn-info btn-circle btn-lg" type="button"><i class="fa fa-comments-o"></i></button>
-                                    </div>
-                                    <a href="javascript:void(0)"><img src="{{ asset('images/users/arijit.jpg') }}" alt="user-img" class="rounded-circle"> <span>Arijit Sinh <small class="text-muted">Offline</small></span></a>
-                                </li>
-                                <li>
-                                    <div class="call-chat">
-                                        <button class="btn btn-success btn-circle btn-lg" type="button"><i class="fa fa-phone"></i></button>
-                                        <button class="btn btn-info btn-circle btn-lg" type="button"><i class="fa fa-comments-o"></i></button>
-                                    </div>
-                                    <a href="javascript:void(0)"><img src="{{ asset('images/users/govinda.jpg') }}" alt="user-img" class="rounded-circle"> <span>Govinda Star <small class="text-success">online</small></span></a>
-                                </li>
-                                <li>
-                                    <div class="call-chat">
-                                        <button class="btn btn-success btn-circle btn-lg" type="button"><i class="fa fa-phone"></i></button>
-                                        <button class="btn btn-info btn-circle btn-lg" type="button"><i class="fa fa-comments-o"></i></button>
-                                    </div>
-                                    <a href="javascript:void(0)"><img src="{{ asset('images/users/hritik.jpg') }}" alt="user-img" class="rounded-circle"> <span>John Abraham<small class="text-success">online</small></span></a>
-                                </li>
-                                <li>
-                                    <div class="call-chat">
-                                        <button class="btn btn-success btn-circle btn-lg" type="button"><i class="fa fa-phone"></i></button>
-                                        <button class="btn btn-info btn-circle btn-lg" type="button"><i class="fa fa-comments-o"></i></button>
-                                    </div>
-                                    <a href="javascript:void(0)"><img src="{{ asset('images/users/varun.jpg') }}" alt="user-img" class="rounded-circle"> <span>Varun Dhavan <small class="text-success">online</small></span></a>
-                                </li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
