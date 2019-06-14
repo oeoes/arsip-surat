@@ -28,6 +28,7 @@ class CreateLettersTable extends Migration
             $table->string('penerima');
             $table->string('nip_penerima')->nullable();
             $table->string('arsip');
+            $table->tinyInteger('is_favorite')->default(0);
             $table->timestamps();
         });
     }
