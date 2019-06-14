@@ -9,3 +9,45 @@
 .list-surat:hover{
     background: rgba(240, 248, 255, .5);
 }
+
+.star{
+    color: #ddd
+}
+
+.star:hover{
+    color: #fb4
+}
+
+.pen:hover{
+    color: #0bbbff
+}
+
+.trash:hover{
+    color: #B22222
+}
+
+.eye:hover{
+    color: #9a71e8
+}
+
+.td-desc{
+    padding-bottom: 6px;
+    border-bottom: 2px dashed rgba(189, 189, 189, 0.15)
+}
+
+.panel-body{
+    background: white;
+}
+
+.lett-ico{
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+}
+
+.in-bg{
+    background: #28a745
+}
+.out-bg{
+    background: #17a2b8
+}
