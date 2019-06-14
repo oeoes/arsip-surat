@@ -167,9 +167,10 @@
                                 @endif
                                 <td>{{ $d->tujuan }}</td>
                                 <td><div class="row">
-                                    <div class="col-12"><i class="fas fa-pencil-alt dt" data-toggle="modal" data-target="#update{{ $dt }}" title="Edit"></i></div>
-                                    <div class="col-12"><i class="fas fa-trash-alt dt" data-toggle="modal" data-target="#delete{{ $dt }}" title="Hapus"></i></div>
-                                    <div class="col-12"><i class="fas fa-eye dt" data-toggle="modal" data-target="#detail{{ $dt }}" title="View detail"></i></div>
+                                <div class="col-12"><i class="fas fa-pencil-alt dt pen" data-toggle="modal" data-target="#update{{ $dt }}" title="Edit"></i></div>
+                                    <div class="col-12"><i class="fas fa-trash-alt dt trash" data-toggle="modal" data-target="#delete{{ $dt }}" title="Hapus"></i></div>
+                                    <div class="col-12"><i class="fas fa-eye dt eye" data-toggle="modal" data-target="#detail{{ $dt }}" title="View detail"></i></div>
+                                    <div class="col-12"><i class="fas fa-star dt star"  title="Tambahkan ke favorit"></i></div>
                                 </div></td>
                             </tr>
 
@@ -185,14 +186,88 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="row">
-                                            <div class="col-12 mb-3">
+                                            <div class="col-md-8">
                                                 <img src="{{ asset($d->arsip) }}" alt="" style="max-width: 100%; align: center">
                                             </div>
-                                            <div class="col-12">
+                                            <div class="col-md-4">
                                                 <div class="row">
-                                                    <div class="col-md-4 offset-md-4">
-                                                        
+                                                    <!-- Detail surat -->
+                                                    <div class="col-12 td-desc">
+                                                        <div class="row">
+                                                            <div class="col-4"><small>Judul</small></div>
+                                                            <div class="col-8">{{ $d->judul }}</div>
+                                                        </div>
                                                     </div>
+                                                    <div class="col-12 td-desc">
+                                                        <div class="row">
+                                                            <div class="col-4"><small>Tgl surat</small></div>
+                                                            <div class="col-8">{{ $d->tgl_surat }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 td-desc">
+                                                        <div class="row">
+                                                            <div class="col-4"><small>Tgl pembukuan</small></div>
+                                                            <div class="col-8">{{ $d->tgl_pembukuan }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 td-desc">
+                                                        <div class="row">
+                                                            <div class="col-4"><small>Asal surat</small></div>
+                                                            <div class="col-8">{{ $d->asal_surat }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 td-desc">
+                                                        <div class="row">
+                                                            <div class="col-4"><small>Jenis</small></div>
+                                                            <div class="col-8">{{ $d->jenis_surat }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 td-desc">
+                                                        <div class="row">
+                                                            <div class="col-4"><small>No surat</small></div>
+                                                            <div class="col-8">{{ $d->no_surat }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 td-desc">
+                                                        <div class="row">
+                                                            <div class="col-4"><small>Tujuan</small></div>
+                                                            <div class="col-8">{{ $d->tujuan }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 td-desc">
+                                                        <div class="row">
+                                                            <div class="col-4"><small>Penerima</small></div>
+                                                            <div class="col-8">{{ $d->penerima }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 td-desc">
+                                                        <div class="row">
+                                                            <div class="col-4"><small>NIP penerima</small></div>
+                                                            <div class="col-8">{{ $d->nip_penerima }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 td-desc">
+                                                        <div class="row">
+                                                            <div class="col-4"><small>Index surat</small></div>
+                                                            <div class="col-8">{{ $d->index_surat }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 td-desc">
+                                                        <div class="row">
+                                                            <div class="col-4"><small>Perihal</small></div>
+                                                            <div class="col-8">{{ $d->perihal }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 td-desc">
+                                                        <div class="row">
+                                                            <div class="col-4"><small>Keterangan</small></div>
+                                                            <div class="col-8">{{ $d->keterangan }}</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 text-center mt-4">
+                                                        <a href="{{ asset($d->arsip) }}" target="_blank" class="btn btn-primary" style="width: 50%" title="Download file arsip"><i class="fa fa-download"></i></a>
+                                                    </div>
+                                                    <!-- End of detail surat -->
                                                 </div>
                                             </div>
                                         </div>
@@ -230,7 +305,7 @@
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title h4" id="myLargeModalLabel">Rekam Surat Masuk/Keluar</h5>
+                                        <h5 class="modal-title h4" id="myLargeModalLabel">Perbarui Surat Masuk/Keluar</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">×</span>
                                         </button>
@@ -251,6 +326,11 @@
                                             </div>
 
                                             <div class="form-group">
+                                                <label for="tgl_surat">Tanggal Surat</label>
+                                                <input value="{{ $d->tgl_surat }}" name="tgl_surat" type="date" class="form-control" id="tgl_surat" placeholder="Masukan tanggal surat">
+                                            </div>
+
+                                            <div class="form-group">
                                                 <label for="asal_surat">Asal</label>
                                                 <input value="{{ $d->asal_surat }}" name="asal_surat" type="text" class="form-control" id="asal_surat" placeholder="Masukan asal surat">
                                             </div>
@@ -263,11 +343,6 @@
                                             <div class="form-group">
                                                 <label for="index_surat">Index</label>
                                                 <input value="{{ $d->index_surat }}" name="index_surat" type="text" class="form-control" id="index_surat" placeholder="Masukan index surat">
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="tgl_surat">Tanggal Surat</label>
-                                                <input value="{{ $d->tgl_surat }}" name="tgl_surat" type="date" class="form-control" id="tgl_surat" placeholder="Masukan tanggal surat">
                                             </div>
 
                                             <div class="form-group">
