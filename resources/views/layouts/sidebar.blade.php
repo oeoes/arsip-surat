@@ -16,10 +16,11 @@
             <li>
                 <a href="{{ route('surat.keluar') }}" class="waves-effect"><i class="fas fa-envelope-open pr-2" aria-hidden="true"></i>Surat Keluar</a>
             </li>
-
+            <li>
+                <a href="{{ route('favorite') }}" class="waves-effect"><i class="fas fa-star pr-2" aria-hidden="true"></i>Favorite</a>
+            </li>
         </ul>
-    </div>
-    
+    </div>    
 </div>
 <!-- ============================================================== -->
 <!-- End Left Sidebar -->
