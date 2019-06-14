@@ -61,8 +61,10 @@ class LetterController extends Controller
 
     public function home() {
         $data = Letter::limit(10)->get();
+        $favorite = Letter::where('is_favorite', 1)->latest()->limit(10)->get();
+        $fav_all = Letter::where('is_favorite', 1)->get();
 
-        return view('home', ['data' => $data]);
+        return view('home', ['data' => $data, 'favorite' => $favorite, 'fav_all' => $fav_all]);
     }
 
     public function recordSurat() {
@@ -141,5 +143,25 @@ class LetterController extends Controller
         $data = Letter::where('jenis_surat', 'keluar')->get();
 
         return view('surat-keluar', ['data' => $data]);
+    }
+
+    public function addFavorite($id) {
+        $current = Letter::find($id);
+
+        if($current->is_favorite == 0) {
+            $current->is_favorite = 1;
+            $current->save();
+        }else{
+            $current->is_favorite = 0;
+            $current->save();
+        }        
+
+        return back();
+    }
+
+    public function favoriteList() {
+        $data = Letter::where('is_favorite', 1)->get();
+
+        return view('favorite', ['data' => $data]);
     }
 }
