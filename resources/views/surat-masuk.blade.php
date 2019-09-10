@@ -13,101 +13,7 @@
         <!-- /.col-lg-12 -->
     </div>
     
-    <!-- Large modal -->
-
-    <div class="modal fade" id="addSurat" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title h4" id="myLargeModalLabel">Rekam Surat Masuk/Keluar</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <!-- Form -->
-
-                <form method="POST" enctype="multipart/form-data" action="{{ route('record.surat') }}">
-                    @csrf
-                    <div class="form-group">
-                        <label for="judul">Judul</label>
-                        <input name="judul" type="text" class="form-control" id="judul" placeholder="Masukan judul">
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="tgl_pembukuan">Tanggal Pembukuan</label>
-                        <input name="tgl_pembukuan" type="date" class="form-control" id="tgl_pembukuan">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="asal_surat">Asal</label>
-                        <input name="asal_surat" type="text" class="form-control" id="asal_surat" placeholder="Masukan asal surat">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="no_surat">No Surat</label>
-                        <input name="no_surat" type="text" class="form-control" id="no_surat" placeholder="Masukan no surat">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="index_surat">Index</label>
-                        <input name="index_surat" type="text" class="form-control" id="index_surat" placeholder="Masukan index surat">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="tgl_surat">Tanggal Surat</label>
-                        <input name="tgl_surat" type="date" class="form-control" id="tgl_surat" placeholder="Masukan tanggal surat">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="jenis_surat">Jenis</label>
-                        <select name="jenis_surat" class="form-control" id="jenis_surat">
-                            <option value="masuk">Surat Masuk</option>
-                            <option value="keluar">Surat Keluar</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="perihal">Perihal</label>
-                        <input name="perihal" type="text" class="form-control" id="perihal" placeholder="Masukan perihal">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="tujuan">Tujuan</label>
-                        <input name="tujuan" type="text" class="form-control" id="tujuan" placeholder="Ditujukan kepada">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="keterangan">Keterangan</label>
-                        <textarea name="keterangan" class="form-control" id="keterangan" cols="5" rows="5" placeholder="Masukan keterangan"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="penerima">Penerima</label>
-                        <input name="penerima" type="text" class="form-control" id="penerima" placeholder="Masukan penerima surat">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="nip_penerima">NIP</label>
-                        <input name="nip_penerima" type="text" class="form-control" id="nip_penerima" placeholder="Masukan NIP penerima">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="arsip">Arsip</label>
-                        <input name="arsip" type="file" class="form-control" id="arsip">
-                        <small class="form-text text-muted">Upload arsip berupa gambar hasil scan.</small>
-                    </div>
-
-                    <input type="submit" value="Submit" class="btn btn-primary">
-                </form>
-
-                <!-- End of Form -->
-            </div>
-        </div>
-    </div>
-    </div>
-    <!-- End of large modal -->
+    @include('layouts.form')
 
     <!-- /.row -->
     <!-- ============================================================== -->
@@ -413,27 +319,38 @@
 
 @section('custom-js')
 <script>
-var ctx = document.getElementById('myChart');
-var myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
-        datasets: [
-        {
-            label: 'Surat Masuk',
-            data: [12, 19, 3, 5, 2, 3, 19, 3, 5, 2, 3, 19],
-            backgroundColor: 'rgba(255, 99, 132, 0.2)'
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
-});
+        var url = "{{ route('letters', ['type' => 'in']) }}";
+        var Bulan = new Array();
+        var Total = new Array();
+        $(document).ready(function(){
+          $.get(url, function(response){
+            response.forEach(function(data){
+                Bulan.push(data.bulan);
+                Total.push(data.total);
+            });           
+            var ctx = document.getElementById("myChart").getContext('2d');
+                var myChart = new Chart(ctx, {
+                  type: 'bar',
+                  data: {
+                      labels:Bulan,
+                      datasets: [{
+                          label: 'Total Catatan surat',
+                          data: Total,
+                          borderWidth: 1,
+                          backgroundColor: 'rgba(255, 99, 132, 0.2)'
+                      }]
+                  },
+                  options: {
+                      scales: {
+                          yAxes: [{
+                              ticks: {
+                                  beginAtZero:true
+                              }
+                          }]
+                      }
+                  }
+              });
+          });
+        });
 </script>
 @endsection

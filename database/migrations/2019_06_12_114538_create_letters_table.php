@@ -17,10 +17,12 @@ class CreateLettersTable extends Migration
             $table->bigIncrements('id');
             $table->string('judul');
             $table->date('tgl_pembukuan');
+            $table->string('bulan');
             $table->string('asal_surat');
             $table->string('no_surat');
             $table->string('index_surat');
             $table->date('tgl_surat');
+            $table->enum('nama_surat', ['disposisi', 'pengantar', 'keterangan', 'keputusan', 'undangan']);
             $table->enum('jenis_surat', ['masuk', 'keluar']);
             $table->text('perihal')->nullable();
             $table->string('tujuan');

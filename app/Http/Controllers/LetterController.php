@@ -4,18 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Letter;
+use DB;
 
 class LetterController extends Controller
 {
 
-    public function __construct() {
-        //
+    public function __construct()
+    {
+        return $this->middleware('auth');
     }
 
     public static function storeSurat($path, $nama) {
+        $bulan = \Carbon\Carbon::createFromFormat('Y-m-d', request('tgl_pembukuan'));
+        $bln = ['', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
         Letter::create([
             'judul' => request('judul'),
             'tgl_pembukuan' => request('tgl_pembukuan'),
+            'bulan' => $bln[(int) $bulan->format('m')],
             'asal_surat' => request('asal_surat'),
             'no_surat' => request('no_surat'),
             'index_surat' => request('index_surat'),
@@ -63,8 +68,11 @@ class LetterController extends Controller
         $data = Letter::limit(10)->get();
         $favorite = Letter::where('is_favorite', 1)->latest()->limit(10)->get();
         $fav_all = Letter::where('is_favorite', 1)->get();
+        $accu = Letter::all()->count('id');
+        $in = Letter::where('jenis_surat', 'masuk')->count('id');
+        $out = Letter::where('jenis_surat', 'keluar')->count('id');
 
-        return view('home', ['data' => $data, 'favorite' => $favorite, 'fav_all' => $fav_all]);
+        return view('home', ['data' => $data, 'favorite' => $favorite, 'fav_all' => $fav_all, 'accu' => $accu, 'in' => $in, 'out' => $out]);
     }
 
     public function recordSurat() {
@@ -163,5 +171,17 @@ class LetterController extends Controller
         $data = Letter::where('is_favorite', 1)->get();
 
         return view('favorite', ['data' => $data]);
+    }
+
+    public function letters($type) {
+        if($type == 'all'){
+            $data = DB::table('letters')->select('bulan', DB::raw('count(*) as total'))->groupBy('bulan')->get();
+        }
+        else if($type == 'in'){
+            $data = DB::table('letters')->select('bulan', DB::raw('count(*) as total'))->groupBy('bulan')->where('jenis_surat', 'masuk')->get();
+        }else{
+            $data = DB::table('letters')->select('bulan', DB::raw('count(*) as total'))->groupBy('bulan')->where('jenis_surat', 'keluar')->get();
+        }
+        return response()->json($data);
     }
 }

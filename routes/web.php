@@ -20,4 +20,7 @@ Route::prefix('arsip-surat')->group(function() {
     Route::get('/delete-surat/{id}', 'LetterController@deleteSurat')->name('delete.surat');
     Route::get('/favorite/keep/{id}', 'LetterController@addFavorite')->name('add.favorite');
     Route::get('/favorite', 'LetterController@favoriteList')->name('favorite');
+    Route::get('/login', 'SessionController@loginPage')->name('login');
+    Route::post('/login', 'SessionController@loginAuth')->name('login.auth');
+    Route::get('/letters/{type}', 'LetterController@letters')->name('letters');
 });

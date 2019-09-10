@@ -10,18 +10,13 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon.png') }}">
     <title>Hi!</title>
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
     <!-- <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet"> -->
     <!-- Menu CSS -->
     <link href="{{ asset('css/sidebar-nav.min.css') }}" rel="stylesheet">
-    <!-- toast CSS -->
-    <link href="../plugins/bower_components/toast-master/css/jquery.toast.css" rel="stylesheet">
-    <!-- morris CSS -->
-    <link href="../plugins/bower_components/morrisjs/morris.css" rel="stylesheet">
     <!-- chartist CSS -->
     <link href="{{ asset('css/chartist.min.css') }}" rel="stylesheet">
-    <link href="../plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" rel="stylesheet">
     <!-- animation CSS -->
     <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
     <!-- Custom CSS -->
@@ -32,12 +27,11 @@
     <!-- custom css -->
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('fontawesome/css/all.css') }}">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+    <style>
+        .table{
+            width: 98%
+        }
+    </style>
 </head>
 
 <body class="fix-header">
@@ -71,11 +65,11 @@
                 <!-- /Logo -->
                 <ul class="nav navbar-top-links navbar-right pull-right">
                     <li>
-                        <form role="search" class="app-search hidden-sm hidden-xs m-r-10">
-                            <input type="text" placeholder="Search..." class="form-control"> <a href=""><i class="fa fa-search"></i></a> </form>
-                    </li>
-                    <li>
-                        <a class="profile-pic" href="#"> <img src="{{ asset('images/users/varun.jpg') }}" alt="user-img" width="36" class="rounded-circle"><b class="hidden-xs">Steave</b></a>
+                        <a class="profile-pic" href="#"> 
+                            <img src="{{ asset('images/users/varun.jpg') }}" alt="user-img" width="36" class="rounded-circle">
+                            
+                            <b class="hidden-xs">{{ auth()->user()->name }}</b>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -115,28 +109,17 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ asset('js/app.js') }}"></script>
     <!-- Chart js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+    <script src="{{ asset('js/chart.js') }}"></script>
 
     @yield('custom-js')
 
-    <!-- Menu Plugin JavaScript -->
-    <script src="../plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
     <!--slimscroll JavaScript -->
     <script src="{{ asset('js/jquery.slimscroll.js') }}"></script>
     <!--Wave Effects -->
     <script src="{{ asset('js/waves.js') }}"></script>
-    <!--Counter js -->
-    <script src="../plugins/bower_components/waypoints/lib/jquery.waypoints.js"></script>
-    <script src="../plugins/bower_components/counterup/jquery.counterup.min.js"></script>
-    <!-- chartist chart -->
-    <script src="../plugins/bower_components/chartist-js/dist/chartist.min.js"></script>
-    <script src="../plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
-    <!-- Sparkline chart JavaScript -->
-    <script src="../plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="{{ asset('js/custom.min.js') }}"></script>
     <script src="{{ asset('js/dashboard1.js') }}"></script>
-    <script src="../plugins/bower_components/toast-master/js/jquery.toast.js"></script>
 </body>
 
 </html>
