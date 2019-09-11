@@ -16,41 +16,43 @@
                     @csrf
                     <div class="form-group">
                         <label for="judul">Judul</label>
-                        <input name="judul" type="text" class="form-control" id="judul" placeholder="Masukan judul">
+                        <input name="judul" type="text" class="form-control" id="judul" placeholder="Masukan judul" required>
                     </div>
 
                     <div class="form-group">
                         <label for="tgl_pembukuan">Tanggal Pembukuan</label>
-                        <input name="tgl_pembukuan" type="date" class="form-control" id="tgl_pembukuan">
+                        <input name="tgl_pembukuan" type="date" class="form-control" id="tgl_pembukuan" required>
                     </div>
 
                     <div class="form-group">
                         <label for="tgl_surat">Tanggal Surat</label>
                         <input name="tgl_surat" type="date" class="form-control" id="tgl_surat"
-                            placeholder="Masukan tanggal surat">
+                            placeholder="Masukan tanggal surat" required>
                     </div>
 
                     <div class="form-group">
                         <label for="asal_surat">Asal</label>
                         <input name="asal_surat" type="text" class="form-control" id="asal_surat"
-                            placeholder="Masukan asal surat">
+                            placeholder="Masukan asal surat" required>
                     </div>
 
                     <div class="form-group">
                         <label for="no_surat">No Surat</label>
                         <input name="no_surat" type="text" class="form-control" id="no_surat"
-                            placeholder="Masukan no surat">
+                            placeholder="Masukan no surat" required>
                     </div>
 
                     <div class="form-group">
                         <label for="index_surat">Index</label>
                         <input name="index_surat" type="text" class="form-control" id="index_surat"
                             placeholder="Masukan index surat">
+                        <small id="emailHelp" class="form-text text-muted">Masukan tanda baca hubung (-) bila Index tidak
+                            tersedia</small>
                     </div>
 
                     <div class="form-group">
                         <label for="nama_surat">Nama Surat</label>
-                        <select name="nama_surat" class="form-control" id="nama_surat">
+                        <select name="nama_surat" class="form-control" id="nama_surat" required>
                             <option disabled selected value>Pilih nama surat</option>
                             <option value="disposisi">Surat Disposisi</option>
                             <option value="keterangan">Surat Keterangan</option>
@@ -62,7 +64,7 @@
 
                     <div class="form-group">
                         <label for="jenis_surat">Jenis</label>
-                        <select name="jenis_surat" class="form-control" id="jenis_surat">
+                        <select name="jenis_surat" class="form-control" id="jenis_surat" required>
                             <option disabled selected value>Pilih jenis surat</option>
                             <option value="masuk">Surat Masuk</option>
                             <option value="keluar">Surat Keluar</option>
@@ -80,19 +82,21 @@
                     <div class="form-group">
                         <label for="tujuan">Tujuan</label>
                         <input name="tujuan" type="text" class="form-control" id="tujuan"
-                            placeholder="Ditujukan kepada">
+                            placeholder="Ditujukan kepada" required>
                     </div>
 
                     <div class="form-group">
                         <label for="keterangan">Keterangan</label>
                         <textarea name="keterangan" class="form-control" id="keterangan" cols="5" rows="5"
                             placeholder="Masukan keterangan"></textarea>
+                        <small id="emailHelp" class="form-text text-muted">Masukan tanda baca hubung (-) bila Keterangan tidak
+                        tersedia</small>
                     </div>
 
                     <div class="form-group">
                         <label for="penerima">Penerima</label>
                         <input name="penerima" type="text" class="form-control" id="penerima"
-                            placeholder="Masukan penerima surat">
+                            placeholder="Masukan penerima surat" required>
                     </div>
 
                     <div class="form-group">
@@ -105,7 +109,7 @@
 
                     <div class="form-group">
                         <label for="arsip">Arsip</label>
-                        <input name="arsip" type="file" class="form-control" id="arsip">
+                        <input name="arsip" type="file" class="form-control" id="arsip" required>
                         <small class="form-text text-muted">Upload arsip berupa gambar hasil scan.</small>
                     </div>
 

@@ -31,10 +31,10 @@
 
 <body>
 
-    <div class="container mt-5">
+    <div class="container mt-5 pt-5">
         <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <div class="card p-3 border-0 shadow-sm">
+            <div class="col-md-6 offset-md-3 mt-5 pt-3">
+                <div class="card p-3 border-0 shadow">
                     <div class="h4 text-center">Login</div>
                     <hr>
                     <form action="{{ route('login.auth') }}" method="POST">

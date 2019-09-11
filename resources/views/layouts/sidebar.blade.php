@@ -19,6 +19,9 @@
             <li>
                 <a href="{{ route('favorite') }}" class="waves-effect"><i class="fas fa-star pr-2" aria-hidden="true"></i>Favorite</a>
             </li>
+            <li>
+                <a href="{{ route('logout') }}" class="waves-effect"><i class="fas fa-user pr-2" aria-hidden="true"></i>Logout</a>
+            </li>
         </ul>
     </div>    
 </div>

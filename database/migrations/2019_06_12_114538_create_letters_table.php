@@ -20,13 +20,13 @@ class CreateLettersTable extends Migration
             $table->string('bulan');
             $table->string('asal_surat');
             $table->string('no_surat');
-            $table->string('index_surat');
+            $table->string('index_surat')->nullable();
             $table->date('tgl_surat');
             $table->enum('nama_surat', ['disposisi', 'pengantar', 'keterangan', 'keputusan', 'undangan']);
             $table->enum('jenis_surat', ['masuk', 'keluar']);
             $table->text('perihal')->nullable();
             $table->string('tujuan');
-            $table->string('keterangan');
+            $table->string('keterangan')->nullable();
             $table->string('penerima');
             $table->string('nip_penerima')->nullable();
             $table->string('arsip');

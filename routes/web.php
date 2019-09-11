@@ -23,4 +23,5 @@ Route::prefix('arsip-surat')->group(function() {
     Route::get('/login', 'SessionController@loginPage')->name('login');
     Route::post('/login', 'SessionController@loginAuth')->name('login.auth');
     Route::get('/letters/{type}', 'LetterController@letters')->name('letters');
+    Route::get('/logout', 'SessionController@logout')->name('logout');
 });
