@@ -35,7 +35,7 @@
                         <option>July 2017</option>
                     </select>
                 </div>
-                <h3 class="box-title">Surat Keluar</h3>
+                <h3 class="box-title">Data Surat</h3>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>

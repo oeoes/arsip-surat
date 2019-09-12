@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon.png') }}">
-    <title>Hi!</title>
+    <title>Arsip surat - Dahboard</title>
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->

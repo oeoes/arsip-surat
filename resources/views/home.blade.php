@@ -79,12 +79,12 @@
         <div class="col-md-12 col-lg-12 col-sm-12">
             <div class="white-box">
                 <div class="col-md-3 col-sm-4 col-xs-6 pull-right">
-                    <select class="form-control pull-right row b-none">
-                        <option>March 2017</option>
-                        <option>April 2017</option>
-                        <option>May 2017</option>
-                        <option>June 2017</option>
-                        <option>July 2017</option>
+                <label>Lihat data</label>
+                    <select id="sort" class="form-control pull-right row b-none">
+                        <option selected="true" disabled="disabled">Pilih tahun</option>
+                        @for($i=2009; $i<= $year; $i++)
+                        <option value="{{ $i }}">{{ $i }}</option>
+                        @endfor
                     </select>
                 </div>
                 <h3 class="box-title">Baru Dibukukan</h3>
@@ -366,90 +366,6 @@
     <!-- ============================================================== -->
     <!-- chat-listing & recent comments -->
     <!-- ============================================================== -->
-    <div class="row">
-        <!-- .col -->
-        <div class="col-md-12 col-lg-8 col-sm-12">
-            <div class="white-box">
-                <h3 class="box-title">Baru Ditambahkan <i class="fa fa-star" style="color: #fb4"></i></h3>
-                <div class="comment-center p-t-10">
-                    <!-- Comment Body -->
-                    @foreach ($favorite as $fav)
-                    <div class="comment-body">
-                        <div class="row no-gutters">
-                            <div class="col-1">
-                                @if($fav->jenis_surat == 'masuk')
-                                <div class="lett-ico in-bg"></div>
-                                @else
-                                <div class="lett-ico out-bg"></div>
-                                @endif
-                            </div>
-                            <div class="col-9">
-                                <div class="mail-contnet pl-0">
-                                    <h5 class="mb-0">{{ $fav->judul }}</h5>
-                                    @if($fav->jenis_surat == 'masuk')
-                                    <div class="text-muted mb-2"><small>Surat {{ $fav->jenis_surat }}</small> | <small>Dari {{ $fav->asal_surat }}</small></div>
-                                    @else
-                                    <div class="text-muted mb-2"><small>Surat {{ $fav->jenis_surat }}</small> | <small>Ke {{ $fav->asal_surat }}</small></div>
-                                    @endif
-                                    <div class="row">
-                                        <div class="col-12 mail-desc mt-0 mb-0">
-                                            <div class="row">
-                                                <div class="col-md-2">Penerima</div>
-                                                <div class="col-md-8">-> {{ $fav->penerima }}</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 mail-desc mt-0 mb-0">
-                                            <div class="row">
-                                                <div class="col-md-2">Index</div>
-                                                <div class="col-md-8">-> {{ $fav->index_surat }}</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 mail-desc mt-0 mb-0">
-                                            <div class="row">
-                                                <div class="col-md-2">Keterangan</div>
-                                                <div class="col-md-8">-> {{ $fav->keterangan }}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
-                    </div>
-                    @endforeach
-                    <!-- End of comment body -->
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="panel">
-                <div class="sk-chat-widgets">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Semua Favorite
-                        </div>
-                        <div class="panel-body">
-                            <ul class="chatonline">
-                                @foreach($fav_all as $fall)
-                                <li>
-                                    <div class="call-chat">
-                                        <button class="btn btn-success btn-circle btn-lg" type="button"><i class="fa fa-phone"></i></button>
-                                        <button class="btn btn-info btn-circle btn-lg" type="button"><i class="fa fa-comments-o"></i></button>
-                                    </div>
-                                    <a href="javascript:void(0)"><img src="{{ asset('images/users/varun.jpg') }}" alt="user-img" class="rounded-circle"> 
-                                        <span>{{ $fall->judul }} @if($fall->jenis_surat == 'masuk')<small class="text-success">{{ $fall->jenis_surat }}</small>@else<small class="text-info">{{ $fall->jenis_surat }}</small>@endif</span>
-                                    </a>
-                                </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /.col -->
-    </div>
 
 @endsection
 
@@ -488,5 +404,12 @@
               });
           });
         });
+
+        $(document).ready(function(){
+            $('#sort').on('change', () => {
+                let tahun = $('#sort').find(":selected").text();
+                location.href = 'http://localhost:8000/arsip-surat/sort/' + tahun                          
+            })
+        })
 </script>
 @endsection

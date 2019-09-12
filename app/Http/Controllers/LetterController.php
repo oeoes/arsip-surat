@@ -65,6 +65,7 @@ class LetterController extends Controller
     }
 
     public function home() {
+        $year = \Carbon\Carbon::now()->format('Y');
         $data = Letter::limit(10)->get();
         $favorite = Letter::where('is_favorite', 1)->latest()->limit(10)->get();
         $fav_all = Letter::where('is_favorite', 1)->get();
@@ -72,7 +73,7 @@ class LetterController extends Controller
         $in = Letter::where('jenis_surat', 'masuk')->count('id');
         $out = Letter::where('jenis_surat', 'keluar')->count('id');
 
-        return view('home', ['data' => $data, 'favorite' => $favorite, 'fav_all' => $fav_all, 'accu' => $accu, 'in' => $in, 'out' => $out]);
+        return view('home', ['data' => $data, 'favorite' => $favorite, 'fav_all' => $fav_all, 'accu' => $accu, 'in' => $in, 'out' => $out, 'year' => $year]);
     }
 
     public function recordSurat() {
@@ -183,5 +184,17 @@ class LetterController extends Controller
             $data = DB::table('letters')->select('bulan', DB::raw('count(*) as total'))->groupBy('bulan')->where('jenis_surat', 'keluar')->get();
         }
         return response()->json($data);
+    }
+
+    public function sortData($tahun) {
+        $data = Letter::whereYear('tgl_pembukuan', $tahun)->get();
+        $year = \Carbon\Carbon::now()->format('Y');
+        $favorite = Letter::where('is_favorite', 1)->latest()->limit(10)->get();
+        $fav_all = Letter::where('is_favorite', 1)->get();
+        $accu = Letter::all()->count('id');
+        $in = Letter::where('jenis_surat', 'masuk')->count('id');
+        $out = Letter::where('jenis_surat', 'keluar')->count('id');
+
+        return view('home', ['data' => $data, 'favorite' => $favorite, 'fav_all' => $fav_all, 'accu' => $accu, 'in' => $in, 'out' => $out, 'year' => $year]);
     }
 }
